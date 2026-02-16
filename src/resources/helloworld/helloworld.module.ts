@@ -7,4 +7,4 @@ import { HelloworldService } from './helloworld.service';
   controllers: [HelloworldController],
   providers: [HelloworldService],
 })
-export class HelloworldModule { }
+export class HelloWorldModule { }
