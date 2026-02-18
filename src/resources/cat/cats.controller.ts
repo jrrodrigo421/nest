@@ -27,10 +27,17 @@ export class CatsController {
   // }
 
 
+  // @Get()
+  // findAll(): Observable<any[]> {
+  //   return of(['dssdsd']);
+  // }
+
+
   @Get()
-  findAll(): Observable<any[]> {
-    return of(['dssdsd']);
+  async findAll(@Query('age') age: number, @Query('breed') breed: string) {
+    return `This action returns all cats filtered by age: ${age} and breed: ${breed}`;
   }
+
 
   @Post()
   async create(@Body() createCatDto: CreateCatDto) {
