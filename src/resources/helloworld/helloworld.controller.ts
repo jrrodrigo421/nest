@@ -3,7 +3,7 @@ import { HelloworldService } from './helloworld.service';
 
 @Controller()
 export class HelloworldController {
-  constructor(private readonly appService: HelloworldService) { }
+  constructor(private readonly appService: HelloworldService) {}
 
   @Get()
   getHello(): string {
