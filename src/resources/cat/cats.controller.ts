@@ -1,9 +1,22 @@
-import { Controller, Get, Header, HttpCode, Param, Post, Query, Redirect, Req } from '@nestjs/common';
-import type { Request } from 'express';
-// import type { FastifyRequest } from 'fastify';
+import { Controller, Get, Header, HostParam, HttpCode, Param, Post, Query, Redirect, Req } from '@nestjs/common';
+// import type { Request } from 'express';
+import type { FastifyRequest } from 'fastify';
+
+
 // @Controller({ host: 'localhostaaaaa' }) // permissao de host especifico
+// @Controller({ host: ':account.localhost' }) // permissao de host especifico
 @Controller('cats')
 export class CatsController {
+
+  @Get()
+  findAll(@Req() request: FastifyRequest): string {
+    // findAll(@Req() request: Request): string {
+    // getInfo(@HostParam('account') account: string) {
+    console.log(request.hostname);  // fastify
+    // console.log(request.get('host'));  // express
+    // console.log(request.body);  // Node
+    return 'get fastify';
+  }
 
   @Post('/create')
   // @HttpCode(204)
@@ -13,14 +26,6 @@ export class CatsController {
     return '>>>>>>>>>>>>>>>   GATO CRIADO    <<<<<<<<<<<<<<<<'
   }
 
-  @Get()
-  // findAll(@Req() request: FastifyRequest): string {
-  findAll(@Req() request: Request): string {
-    // console.log(request.hostname);  // fastify
-    console.log(request.get('host'));  // express
-    console.log(request.body);  // Node
-    return 'teste gats module';
-  }
 
   // Rota curinga:
   @Get('abcd/*')
@@ -42,18 +47,18 @@ export class CatsController {
       return { url: 'http://localhost:3000/cats/admin/admin' }
   }
 
-  @Get(':aa')
-  findOne(@Param() params: any): string {
-    console.log(params.aa)
-    console.log(params.id)
-    return `o parametro id é : ####### ${params.id} <<<<<<<<<<<<<<<<<<<<<<<`
-  }
+  // @Get(':aa')
+  // findOne(@Param() params: any): string {
+  //   console.log(params.aa)
+  //   console.log(params.id)
+  //   return `o parametro id é : ####### ${params.id} <<<<<<<<<<<<<<<<<<<<<<<`
+  // }
 
-  @Get('/test/:id')
-  findOneId(@Param('id') id: string): string {
-    // console.log(params.aa)
-    console.log(id)
-    return `o parametro id é : ####### ${id} <<<<<<<<<<<<<<<<<<<<<<<`
-  }
+  // @Get('/test/:id')
+  // findOneId(@Param('id') id: string): string {
+  //   // console.log(params.aa)
+  //   console.log(id)
+  //   return `o parametro id é : ####### ${id} <<<<<<<<<<<<<<<<<<<<<<<`
+  // }
 
 }
