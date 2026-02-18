@@ -1,8 +1,15 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Controller, Get, Post, Req } from '@nestjs/common';
 import type { Request } from 'express';
 // import type { FastifyRequest } from 'fastify';
 @Controller('cats')
 export class CatsController {
+
+  @Post('/create')
+  createGat(): string {
+    return 'this action adds a new cat'
+  }
+
+
   @Get()
   // findAll(@Req() request: FastifyRequest): string {
   findAll(@Req() request: Request): string {
@@ -11,4 +18,12 @@ export class CatsController {
     console.log(request.body);  // Node
     return 'teste gats module';
   }
+
+  // Rota curinga:
+
+  @Get('abcd/*')
+  findAllAbcd() {
+    return 'this route uses a wildcard'
+  }
+
 }
