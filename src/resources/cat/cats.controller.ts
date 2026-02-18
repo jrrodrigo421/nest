@@ -39,6 +39,28 @@ export class CatsController {
   }
 
 
+
+  // para testes:
+
+  // curl.exe -g "http://localhost:3000/cats/complex?filter[where][name]=John&filter[where][age]=30"
+
+  // curl.exe -g "http://localhost:3000/cats/complex?item[]=1&item[]=2&item[]=3"
+
+  // curl.exe -g "http://localhost:3000/cats/complex?filter[where][name]=John&item[]=Azul&item[]=Verde"
+
+  @Get('complex')
+  complexQuery(@Query() query: any, @Query('filter') filter: any, @Query('item') items: string[]) {
+    console.log('>>>>:', query);
+    console.log('####:', filter);
+    console.log('$$$$$$:', items);
+    return {
+      full_query: query,
+      received_filter: filter,
+      received_items: items,
+    };
+  }
+
+
   @Post()
   async create(@Body() createCatDto: CreateCatDto) {
     console.log(createCatDto, '<<<<<<<<<<<<<<<<<<<<<<<,,')
