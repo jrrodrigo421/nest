@@ -1,14 +1,17 @@
-import { Controller, Get, Post, Req } from '@nestjs/common';
+import { Controller, Get, Header, HttpCode, Param, Post, Query, Redirect, Req } from '@nestjs/common';
 import type { Request } from 'express';
 // import type { FastifyRequest } from 'fastify';
+// @Controller({ host: 'localhostaaaaa' }) // permissao de host especifico
 @Controller('cats')
 export class CatsController {
 
   @Post('/create')
+  // @HttpCode(204)
+  @Header('Cache-Control', 'no-store')
+  // @Redirect('https://rjrsolucoes.vercel.app/', 302)
   createGat(): string {
-    return 'this action adds a new cat'
+    return '>>>>>>>>>>>>>>>   GATO CRIADO    <<<<<<<<<<<<<<<<'
   }
-
 
   @Get()
   // findAll(@Req() request: FastifyRequest): string {
@@ -20,10 +23,37 @@ export class CatsController {
   }
 
   // Rota curinga:
-
   @Get('abcd/*')
   findAllAbcd() {
     return 'this route uses a wildcard'
+  }
+
+  @Get('docs')
+  @Redirect('https://rjrsolucoes.vercel.app', 303)
+  getDocs(@Query('version') version) {
+    if (version && version === '5')
+      return { url: 'https://rjrsolucoes.vercel.app/projects' }
+  }
+
+  @Get('admin')
+  @Redirect('https://rjrsolucoes.vercel.app', 303)
+  getDocsAdmin(@Query('version') version) {
+    if (version && version === '5')
+      return { url: 'http://localhost:3000/cats/admin/admin' }
+  }
+
+  @Get(':aa')
+  findOne(@Param() params: any): string {
+    console.log(params.aa)
+    console.log(params.id)
+    return `o parametro id é : ####### ${params.id} <<<<<<<<<<<<<<<<<<<<<<<`
+  }
+
+  @Get('/test/:id')
+  findOneId(@Param('id') id: string): string {
+    // console.log(params.aa)
+    console.log(id)
+    return `o parametro id é : ####### ${id} <<<<<<<<<<<<<<<<<<<<<<<`
   }
 
 }
