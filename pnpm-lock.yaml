@@ -26,6 +26,9 @@ importers:
       fastify:
         specifier: ^5.7.4
         version: 5.7.4
+      qs:
+        specifier: ^6.15.0
+        version: 6.15.0
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
