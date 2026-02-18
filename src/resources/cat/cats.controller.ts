@@ -1,6 +1,8 @@
-import { Controller, Get, Header, HostParam, HttpCode, Param, Post, Query, Redirect, Req } from '@nestjs/common';
+import { Body, Controller, Get, Header, HostParam, HttpCode, Param, Post, Query, Redirect, Req } from '@nestjs/common';
 // import type { Request } from 'express';
 import type { FastifyRequest } from 'fastify';
+import { Observable, of } from 'rxjs';
+import { CreateCatDto } from './create-cat.dto';
 
 
 // @Controller({ host: 'localhostaaaaa' }) // permissao de host especifico
@@ -8,14 +10,32 @@ import type { FastifyRequest } from 'fastify';
 @Controller('cats')
 export class CatsController {
 
+  // @Get()
+  // findAll(@Req() request: FastifyRequest): string {
+  //   // findAll(@Req() request: Request): string {
+  //   // getInfo(@HostParam('account') account: string) {
+  //   console.log(request.hostname);  // fastify
+  //   // console.log(request.get('host'));  // express
+  //   // console.log(request.body);  // Node
+  //   return 'get fastify';
+  // }
+
+
+  // @Get()
+  // async findAll(): Promise<any[]> {
+  //   return ['sidjisd', 'suhudhsdhushdsdhsudhushd'];
+  // }
+
+
   @Get()
-  findAll(@Req() request: FastifyRequest): string {
-    // findAll(@Req() request: Request): string {
-    // getInfo(@HostParam('account') account: string) {
-    console.log(request.hostname);  // fastify
-    // console.log(request.get('host'));  // express
-    // console.log(request.body);  // Node
-    return 'get fastify';
+  findAll(): Observable<any[]> {
+    return of(['dssdsd']);
+  }
+
+  @Post()
+  async create(@Body() createCatDto: CreateCatDto) {
+    console.log(createCatDto, '<<<<<<<<<<<<<<<<<<<<<<<,,')
+    return 'dsdhushdushdushduhsudhsudhsuhdushdus'
   }
 
   @Post('/create')
