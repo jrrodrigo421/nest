@@ -4,7 +4,6 @@ import type { FastifyRequest } from 'fastify';
 import { Observable, of } from 'rxjs';
 import { CreateCatDto } from './create-cat.dto';
 
-
 // @Controller({ host: 'localhostaaaaa' }) // permissao de host especifico
 // @Controller({ host: ':account.localhost' }) // permissao de host especifico
 @Controller('cats')
@@ -38,10 +37,7 @@ export class CatsController {
     return `This action returns all cats filtered by age: ${age} and breed: ${breed}`;
   }
 
-
-
   // para testes:
-
   // curl.exe -g "http://localhost:3000/cats/complex?filter[where][name]=John&filter[where][age]=30"
 
   // curl.exe -g "http://localhost:3000/cats/complex?item[]=1&item[]=2&item[]=3"
